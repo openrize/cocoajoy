@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact CocoaJoy – Customer Support</title>
+    <meta name="description"
+        content="Have questions about CocoaJoy chocolates? Contact our team via email, phone, or our online form. We're here to help!" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="logo-icon">🍫</span><span
+                    class="logo-text">CocoaJoy</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="shop.html" class="nav-link">Shop</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="cart-icon" id="cartIcon" title="Cart">🛒 <span class="cart-badge"
+                        id="cartBadge">0</span></a>
+                <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="section-badge">We're Here for You</div>
+            <h1>Contact CocoaJoy</h1>
+            <p>Have questions or need assistance? Our chocolate experts are happy to help.</p>
+            <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-layout">
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="section-badge">Get In Touch</div>
+                    <h2>We'd Love to Hear From You</h2>
+                    <p>Whether you want help choosing the perfect gift, track an order, or just say hi — we're always
+                        happy to chat about chocolate!</p>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📧</div>
+                        <div class="contact-item-text">
+                            <strong>Email Us</strong>
+                            <span>support@cocoajoy.com</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📞</div>
+                        <div class="contact-item-text">
+                            <strong>Call Us</strong>
+                            <span>+1 (800) COCOA-JOY</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">⏰</div>
+                        <div class="contact-item-text">
+                            <strong>Business Hours</strong>
+                            <span>Mon–Fri: 9am – 6pm EST<br />Sat: 10am – 4pm EST</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">🚚</div>
+                        <div class="contact-item-text">
+                            <strong>Order Support</strong>
+                            <span>We usually reply within 24 hours</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div style="margin-top:36px">
+                        <h4 style="color:var(--choc-dark);margin-bottom:16px">Follow Our Sweet Journey</h4>
+                        <div class="social-links" style="gap:12px">
+                            <a href="#" class="social-link" title="Instagram"
+                                style="background:linear-gradient(135deg,#e1306c,#833ab4);color:#fff;font-size:1.2rem">📸</a>
+                            <a href="#" class="social-link" title="Facebook"
+                                style="background:#1877f2;color:#fff;font-size:1.2rem">📘</a>
+                            <a href="#" class="social-link" title="Twitter"
+                                style="background:#1da1f2;color:#fff;font-size:1.2rem">🐦</a>
+                            <a href="#" class="social-link" title="Pinterest"
+                                style="background:#e60023;color:#fff;font-size:1.2rem">📌</a>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Shortcut -->
+                    <div
+                        style="margin-top:36px;background:linear-gradient(135deg,#f5e9d7,#eedbc0);border-radius:16px;padding:24px">
+                        <h4 style="color:var(--choc-dark);margin-bottom:8px">🤔 Common Questions?</h4>
+                        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:14px">Check our FAQ page for
+                            quick answers about shipping, storage, returns, and more.</p>
+                        <a href="faq.html" class="btn btn-primary btn-sm">Visit FAQ →</a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3 style="margin-bottom:24px;color:var(--choc-dark)">Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Doe" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inquiry">Product Inquiry</label>
+                            <select id="inquiry" name="inquiry">
+                                <option value="">Select a topic…</option>
+                                <option>Order Status</option>
+                                <option>Product Information</option>
+                                <option>Gift Customisation</option>
+                                <option>Corporate / Bulk Orders</option>
+                                <option>Returns & Refunds</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderNum">Order Number (if applicable)</label>
+                            <input type="text" id="orderNum" name="orderNum" placeholder="CJ-12345" />
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" name="message" placeholder="Tell us how we can help…"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-full">Send Message 🍫</button>
+                        <p style="text-align:center;color:var(--text-muted);font-size:0.8rem;margin-top:14px">We
+                            typically respond within 24 hours on business days.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map-style decoration -->
+    <section style="background:var(--choc-dark);padding:70px 0;text-align:center">
+        <div class="container">
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <div class="why-icon">💬</div>
+                    <h3 style="color:var(--choc-gold)">24h Response</h3>
+                    <p>We reply to all messages within one business day.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon">😊</div>
+                    <h3 style="color:var(--choc-gold)">Expert Guidance</h3>
+                    <p>Our team knows every chocolate inside out.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon">🔒</div>
+                    <h3 style="color:var(--choc-gold)">Secure & Private</h3>
+                    <p>Your information is always safe with us.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon">🎁</div>
+                    <h3 style="color:var(--choc-gold)">Gift Consultations</h3>
+                    <p>Free personalised advice for group or corporate gifting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="index.html" class="logo"><span class="logo-icon">🍫</span><span
+                            class="logo-text">CocoaJoy</span></a>
+                    <p>Premium handcrafted chocolates since 2015.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="shop.html">All Products</a></li>
+                        <li><a href="shop.html#gift-boxes">Gift Boxes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>📧 support@cocoajoy.com</li>
+                        <li>📞 +1 (800) COCOA-JOY</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CocoaJoy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart 🛒</h3><button class="cart-close" id="cartClose">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">Total: <strong id="cartTotal">$0.00</strong></div><a href="shop.html"
+                class="btn btn-primary btn-full" href="checkout.html">Checkout</a>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
+

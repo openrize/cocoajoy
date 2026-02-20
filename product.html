@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dark Chocolate Truffle Box – CocoaJoy</title>
+    <meta name="description"
+        content="Handcrafted dark chocolate truffles from CocoaJoy. Premium cocoa beans, elegant packaging. Perfect for gifting or treating yourself." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="logo-icon">🍫</span><span
+                    class="logo-text">CocoaJoy</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="shop.html" class="nav-link active">Shop</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="cart-icon" id="cartIcon" title="Cart">🛒 <span class="cart-badge"
+                        id="cartBadge">0</span></a>
+                <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height:72px"></div>
+
+    <section class="product-hero">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb" style="justify-content:flex-start;margin-bottom:32px">
+                <a href="index.html">Home</a><span>/</span>
+                <a href="shop.html">Shop</a><span>/</span>
+                <span id="pBreadcrumb">Product</span>
+            </div>
+
+            <div class="product-layout">
+                <!-- Product Image -->
+                <div>
+                    <div class="product-main-img" id="pImgBox">
+                        <div id="pBadge" class="product-badge badge-bestseller">BESTSELLER</div>
+                        <span id="pEmoji" style="font-size:8rem">🍫</span>
+                    </div>
+                    <!-- Thumbnails -->
+                    <div style="display:flex;gap:12px;margin-top:16px">
+                        <div
+                            style="width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#3b1a08,#6b3a2a);display:flex;align-items:center;justify-content:center;font-size:1.8rem;border:2px solid var(--choc-gold);cursor:pointer">
+                            🍫</div>
+                        <div
+                            style="width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#5c2a0e,#8b4513);display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;opacity:0.7">
+                            ✨</div>
+                        <div
+                            style="width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#1a0e05,#3b1a08);display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;opacity:0.7">
+                            🎁</div>
+                    </div>
+                </div>
+
+                <!-- Product Details -->
+                <div>
+                    <div class="section-badge" style="margin-bottom:12px" id="pCategoryBadge">Artisanal</div>
+                    <h1 class="product-detail-name" id="pName">Dark Chocolate Truffle Box</h1>
+                    <div class="product-detail-rating">
+                        <span class="product-stars" style="font-size:1rem" id="pRatingStars">★★★★★</span>
+                        <span class="product-reviews" id="pRatingCount">(284 reviews)</span>
+                    </div>
+                    <div class="product-detail-price" id="pPrice">$28.99</div>
+                    <p class="product-detail-desc" id="pDesc">Experience the richness of our handcrafted dark chocolate
+                        truffles. Each piece is made with premium cocoa and care, delivering a luxurious chocolate
+                        experience.</p>
+
+                    <!-- Size Picker -->
+                    <div class="size-picker">
+                        <label>Size / Quantity</label>
+                        <div class="size-options" id="pSizes">
+                            <button class="size-opt selected">6 Pieces</button>
+                            <button class="size-opt">12 Pieces</button>
+                            <button class="size-opt">24 Pieces</button>
+                        </div>
+                    </div>
+
+                    <!-- Qty Picker -->
+                    <div class="qty-picker">
+                        <label>Qty</label>
+                        <div class="qty-control">
+                            <button onclick="changeProductQty(-1)">−</button>
+                            <input type="number" id="pQty" value="1" min="1" max="20" />
+                            <button onclick="changeProductQty(1)">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart -->
+                    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px">
+                        <button class="btn btn-primary btn-lg" id="pAddToCart" style="flex:1">Add to Cart 🛒</button>
+                        <button class="btn btn-outline btn-lg"
+                            style="background:var(--choc-light);color:var(--choc-rich);border-color:var(--choc-caramel)"
+                            onclick="showToast('Added to wishlist! ❤️')">♡ Wishlist</button>
+                    </div>
+
+                    <!-- Features List -->
+                    <ul class="product-features" id="pFeatures">
+                        <li>Handcrafted truffles</li>
+                        <li>Premium cocoa beans</li>
+                        <li>Elegant packaging, perfect for gifts</li>
+                        <li>Available in 6, 12, or 24-piece boxes</li>
+                    </ul>
+
+                    <!-- Trust Badges -->
+                    <div
+                        style="display:flex;gap:16px;flex-wrap:wrap;padding:20px 0;border-top:1px solid rgba(92,42,14,0.1);border-bottom:1px solid rgba(92,42,14,0.1)">
+                        <div style="text-align:center;flex:1;min-width:80px">
+                            <div style="font-size:1.5rem">🚚</div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Free
+                                Shipping<br />over $40</div>
+                        </div>
+                        <div style="text-align:center;flex:1;min-width:80px">
+                            <div style="font-size:1.5rem">🎁</div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Gift<br />Packaging
+                            </div>
+                        </div>
+                        <div style="text-align:center;flex:1;min-width:80px">
+                            <div style="font-size:1.5rem">👐</div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Handcrafted<br />Daily
+                            </div>
+                        </div>
+                        <div style="text-align:center;flex:1;min-width:80px">
+                            <div style="font-size:1.5rem">↩️</div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">14-day<br />Returns
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section style="background:var(--choc-light);padding:80px 0">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Customer Reviews</div>
+                <h2 class="section-title">What People Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★★</div>
+                    <p>"Absolutely divine! Gifted these to my mum and she couldn't stop raving about them. Perfect
+                        packaging too."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SK</div>
+                        <div><strong>S. Kumar</strong><span>Verified Buyer</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★★</div>
+                    <p>"The best dark chocolate truffles I've ever tasted. Rich, smooth, and not too sweet. Will
+                        definitely reorder!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LM</div>
+                        <div><strong>L. Martin</strong><span>Verified Buyer</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★☆</div>
+                    <p>"Arrived perfectly and tasted incredible. The box presentation is gorgeous. A couple of the
+                        pieces were slightly irregular but still delicious."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PG</div>
+                        <div><strong>P. Gibbs</strong><span>Verified Buyer</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section style="background:var(--choc-cream);padding:80px 0">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">You May Also Like</div>
+                <h2 class="section-title">Related Products</h2>
+            </div>
+            <div class="products-grid" id="relatedGrid"></div>
+        </div>
+    </section>
+
+    <section class="cta-section" style="padding:70px 0">
+        <div class="container cta-content">
+            <h2>Explore All Our Chocolates</h2>
+            <a href="shop.html" class="btn btn-gold btn-lg">Shop All Products</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="index.html" class="logo"><span class="logo-icon">🍫</span><span
+                            class="logo-text">CocoaJoy</span></a>
+                    <p>Premium handcrafted chocolates since 2015.</p>
+                    <div class="social-links"><a href="#" class="social-link">📸</a><a href="#"
+                            class="social-link">📘</a><a href="#" class="social-link">🐦</a></div>
+                </div>
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="shop.html">All Products</a></li>
+                        <li><a href="shop.html#gift-boxes">Gift Boxes</a></li>
+                        <li><a href="shop.html#vegan">Vegan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>📧 support@cocoajoy.com</li>
+                    </ul>
+                    <div class="newsletter">
+                        <p>Get sweet deals:</p>
+                        <div class="newsletter-form"><input type="email" placeholder="Your email"
+                                id="footerEmail" /><button onclick="subscribeNewsletter()"
+                                class="btn btn-primary">Join</button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CocoaJoy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart 🛒</h3><button class="cart-close" id="cartClose">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">Total: <strong id="cartTotal">$0.00</strong></div><a href="shop.html"
+                class="btn btn-primary btn-full" href="checkout.html">Checkout</a>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
+

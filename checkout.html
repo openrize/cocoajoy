@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout – CocoaJoy</title>
+    <meta name="description"
+        content="Securely complete your CocoaJoy chocolate order. Fast, fresh delivery nationwide." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* ── Checkout-specific styles ── */
+        body {
+            background: var(--choc-light);
+        }
+
+        .checkout-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 24px 80px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media(max-width: 900px) {
+            .checkout-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── Steps header ── */
+        .checkout-steps {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            background: #fff;
+            border-radius: var(--radius-md);
+            padding: 20px 28px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 28px;
+            overflow-x: auto;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .step.active {
+            color: var(--choc-rich);
+        }
+
+        .step.done {
+            color: var(--choc-gold);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            background: rgba(92, 42, 14, 0.08);
+            color: var(--text-muted);
+        }
+
+        .step.active .step-num {
+            background: var(--choc-rich);
+            color: #fff;
+        }
+
+        .step.done .step-num {
+            background: var(--choc-gold);
+            color: var(--choc-dark);
+        }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: rgba(92, 42, 14, 0.1);
+            margin: 0 8px;
+            min-width: 20px;
+        }
+
+        .step.done+.step-line,
+        .step.active+.step-line {
+            background: rgba(212, 168, 67, 0.4);
+        }
+
+        /* ── Section cards ── */
+        .checkout-card {
+            background: #fff;
+            border-radius: var(--radius-md);
+            padding: 28px 32px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 20px;
+            border: 1px solid rgba(92, 42, 14, 0.07);
+        }
+
+        .checkout-card h3 {
+            font-size: 1.05rem;
+            color: var(--choc-dark);
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(92, 42, 14, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkout-card h3 .card-icon {
+            font-size: 1.2rem;
+        }
+
+        /* ── Form ── */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.83rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 11px 16px;
+            border: 2px solid rgba(92, 42, 14, 0.13);
+            border-radius: var(--radius-sm);
+            outline: none;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.92rem;
+            color: var(--choc-dark);
+            background: var(--choc-light);
+            transition: border-color var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--choc-rich);
+            background: #fff;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 14px;
+        }
+
+        @media(max-width: 480px) {
+
+            .form-row,
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── Shipping options ── */
+        .shipping-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .shipping-opt {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border: 2px solid rgba(92, 42, 14, 0.12);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .shipping-opt:hover {
+            border-color: rgba(92, 42, 14, 0.3);
+            background: var(--choc-light);
+        }
+
+        .shipping-opt.selected {
+            border-color: var(--choc-rich);
+            background: #fff8f0;
+        }
+
+        .shipping-opt input[type=radio] {
+            accent-color: var(--choc-rich);
+            width: 17px;
+            height: 17px;
+            flex-shrink: 0;
+        }
+
+        .shipping-opt-info {
+            flex: 1;
+        }
+
+        .shipping-opt-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--choc-dark);
+        }
+
+        .shipping-opt-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .shipping-opt-price {
+            font-weight: 700;
+            color: var(--choc-rich);
+            font-size: 0.92rem;
+        }
+
+        /* ── Payment card fields ── */
+        .card-icons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .card-brand {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid rgba(92, 42, 14, 0.15);
+        }
+
+        .card-brand.visa {
+            background: #1a1f71;
+            color: #fff;
+        }
+
+        .card-brand.mc {
+            background: #eb001b;
+            color: #fff;
+        }
+
+        .card-brand.amex {
+            background: #2e77bc;
+            color: #fff;
+        }
+
+        .card-brand.paypal {
+            background: #003087;
+            color: #fff;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon input {
+            padding-right: 44px;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        /* ── Promo code ── */
+        .promo-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .promo-row input {
+            flex: 1;
+        }
+
+        /* ── Order summary (right column) ── */
+        .order-summary {
+            background: #fff;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid rgba(92, 42, 14, 0.07);
+            position: sticky;
+            top: 90px;
+        }
+
+        .summary-header {
+            background: var(--choc-dark);
+            padding: 20px 24px;
+            color: var(--choc-cream);
+        }
+
+        .summary-header h3 {
+            font-size: 1rem;
+            margin: 0;
+            border: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .summary-body {
+            padding: 20px 24px;
+        }
+
+        .summary-items {
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(92, 42, 14, 0.06);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-item-emoji {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #f5e9d7, #eedbc0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        .summary-item-qty {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--choc-rich);
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .summary-item-info {
+            flex: 1;
+        }
+
+        .summary-item-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--choc-dark);
+        }
+
+        .summary-item-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .summary-item-price {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--choc-rich);
+        }
+
+        .summary-divider {
+            height: 1px;
+            background: rgba(92, 42, 14, 0.08);
+            margin: 14px 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .summary-row.total {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--choc-dark);
+            margin-top: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .summary-row.total span:last-child {
+            color: var(--choc-rich);
+        }
+
+        .summary-row.savings {
+            color: var(--green-vegan);
+            font-weight: 700;
+        }
+
+        /* ── Trust badges ── */
+        .trust-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 16px 24px;
+            background: #fffaf5;
+            border-top: 1px solid rgba(92, 42, 14, 0.07);
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .trust-item span:first-child {
+            font-size: 1rem;
+        }
+
+        /* ── Empty cart notice ── */
+        .empty-cart-notice {
+            text-align: center;
+            padding: 80px 24px;
+            background: #fff;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .empty-cart-notice .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .empty-cart-notice h3 {
+            margin-bottom: 12px;
+            color: var(--choc-dark);
+        }
+
+        .empty-cart-notice p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* ── Order Confirmation overlay ── */
+        .confirmation-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            background: rgba(26, 8, 0, 0.85);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .confirmation-overlay.show {
+            display: flex;
+        }
+
+        .confirmation-box {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            padding: 56px 48px;
+            text-align: center;
+            max-width: 520px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .confirmation-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: float 2s ease infinite;
+        }
+
+        .confirmation-box h2 {
+            color: var(--choc-dark);
+            margin-bottom: 12px;
+        }
+
+        .confirmation-box p {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .order-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--choc-gold);
+            font-weight: 700;
+            margin: 16px 0;
+        }
+
+        .confirmation-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="logo-icon">🍫</span><span
+                    class="logo-text">CocoaJoy</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="shop.html" class="nav-link">Shop</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="cart-icon" id="cartIcon" title="Cart">🛒 <span class="cart-badge"
+                        id="cartBadge">0</span></a>
+                <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height:72px"></div>
+
+    <!-- Page Title -->
+    <div style="background:var(--choc-dark);padding:28px 0">
+        <div class="container"
+            style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+            <div>
+                <h1 style="color:var(--choc-cream);font-size:1.7rem;margin-bottom:4px">Secure Checkout</h1>
+                <div class="breadcrumb" style="justify-content:flex-start">
+                    <a href="index.html">Home</a><span>/</span>
+                    <a href="shop.html">Shop</a><span>/</span>
+                    <span>Checkout</span>
+                </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;color:rgba(253,246,227,0.6);font-size:0.85rem">
+                🔒 SSL Secured &nbsp;|&nbsp; 🍫 Fresh Guarantee
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="padding-top:32px">
+
+        <!-- Progress Steps -->
+        <div class="checkout-steps" id="checkoutSteps">
+            <div class="step done" id="step1">
+                <div class="step-num">✓</div> Cart
+            </div>
+            <div class="step-line"></div>
+            <div class="step active" id="step2">
+                <div class="step-num">2</div> Details
+            </div>
+            <div class="step-line"></div>
+            <div class="step" id="step3">
+                <div class="step-num">3</div> Payment
+            </div>
+            <div class="step-line"></div>
+            <div class="step" id="step4">
+                <div class="step-num">4</div> Confirm
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main checkout layout -->
+    <div class="checkout-wrapper" id="checkoutWrapper">
+
+        <!-- LEFT: Forms -->
+        <div id="leftCol">
+
+            <!-- Empty cart notice (shown if cart is empty) -->
+            <div class="empty-cart-notice" id="emptyCartNotice" style="display:none">
+                <div class="empty-icon">🛒</div>
+                <h3>Your cart is empty</h3>
+                <p>Add some delicious chocolates before checking out!</p>
+                <a href="shop.html" class="btn btn-primary btn-lg">Browse Chocolates →</a>
+            </div>
+
+            <!-- Panels (hidden if cart empty) -->
+            <div id="formPanels">
+
+                <!-- Contact Information -->
+                <div class="checkout-card">
+                    <h3><span class="card-icon">👤</span> Contact Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" placeholder="Jane" autocomplete="given-name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" placeholder="Doe" autocomplete="family-name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" placeholder="jane@example.com" autocomplete="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+1 (555) 000-0000" autocomplete="tel" />
+                    </div>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="checkout-card">
+                    <h3><span class="card-icon">📦</span> Shipping Address</h3>
+                    <div class="form-group">
+                        <label for="address1">Address Line 1 *</label>
+                        <input type="text" id="address1" placeholder="123 Cocoa Street" autocomplete="address-line1" />
+                    </div>
+                    <div class="form-group">
+                        <label for="address2">Address Line 2</label>
+                        <input type="text" id="address2" placeholder="Apt, suite, unit (optional)"
+                            autocomplete="address-line2" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" placeholder="New York" autocomplete="address-level2" />
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State *</label>
+                            <select id="state" autocomplete="address-level1">
+                                <option value="">Select state…</option>
+                                <option>Alabama</option>
+                                <option>Alaska</option>
+                                <option>Arizona</option>
+                                <option>Arkansas</option>
+                                <option>California</option>
+                                <option>Colorado</option>
+                                <option>Connecticut</option>
+                                <option>Delaware</option>
+                                <option>Florida</option>
+                                <option>Georgia</option>
+                                <option>Hawaii</option>
+                                <option>Idaho</option>
+                                <option>Illinois</option>
+                                <option>Indiana</option>
+                                <option>Iowa</option>
+                                <option>Kansas</option>
+                                <option>Kentucky</option>
+                                <option>Louisiana</option>
+                                <option>Maine</option>
+                                <option>Maryland</option>
+                                <option>Massachusetts</option>
+                                <option>Michigan</option>
+                                <option>Minnesota</option>
+                                <option>Mississippi</option>
+                                <option>Missouri</option>
+                                <option>Montana</option>
+                                <option>Nebraska</option>
+                                <option>Nevada</option>
+                                <option>New Hampshire</option>
+                                <option>New Jersey</option>
+                                <option>New Mexico</option>
+                                <option>New York</option>
+                                <option>North Carolina</option>
+                                <option>North Dakota</option>
+                                <option>Ohio</option>
+                                <option>Oklahoma</option>
+                                <option>Oregon</option>
+                                <option>Pennsylvania</option>
+                                <option>Rhode Island</option>
+                                <option>South Carolina</option>
+                                <option>South Dakota</option>
+                                <option>Tennessee</option>
+                                <option>Texas</option>
+                                <option>Utah</option>
+                                <option>Vermont</option>
+                                <option>Virginia</option>
+                                <option>Washington</option>
+                                <option>West Virginia</option>
+                                <option>Wisconsin</option>
+                                <option>Wyoming</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip">ZIP Code *</label>
+                        <input type="text" id="zip" placeholder="10001" autocomplete="postal-code" maxlength="10" />
+                    </div>
+                    <!-- Gift option -->
+                    <div
+                        style="display:flex;align-items:center;gap:10px;margin-top:4px;padding:14px;background:var(--choc-light);border-radius:var(--radius-sm)">
+                        <input type="checkbox" id="isGift"
+                            style="accent-color:var(--choc-rich);width:17px;height:17px" />
+                        <label for="isGift"
+                            style="font-size:0.9rem;color:var(--choc-dark);cursor:pointer;font-weight:600">🎁 This is a
+                            gift — add complimentary gift packaging & message</label>
+                    </div>
+                    <div id="giftMsgBox" style="display:none;margin-top:12px">
+                        <div class="form-group" style="margin-bottom:0">
+                            <label for="giftMsg">Gift Message (max 150 chars)</label>
+                            <input type="text" id="giftMsg" placeholder="Happy Birthday! With love 🍫"
+                                maxlength="150" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Method -->
+                <div class="checkout-card">
+                    <h3><span class="card-icon">🚚</span> Shipping Method</h3>
+                    <div class="shipping-options" id="shippingOptions">
+                        <label class="shipping-opt selected" id="ship-standard">
+                            <input type="radio" name="shipping" value="standard" checked />
+                            <div class="shipping-opt-info">
+                                <div class="shipping-opt-name">Standard Shipping</div>
+                                <div class="shipping-opt-desc">3–5 business days · Insulated packaging</div>
+                            </div>
+                            <span class="shipping-opt-price free-ship" id="standardPrice">FREE</span>
+                        </label>
+                        <label class="shipping-opt" id="ship-express">
+                            <input type="radio" name="shipping" value="express" />
+                            <div class="shipping-opt-info">
+                                <div class="shipping-opt-name">Express Shipping</div>
+                                <div class="shipping-opt-desc">1–2 business days · Priority fresh delivery</div>
+                            </div>
+                            <span class="shipping-opt-price">$9.99</span>
+                        </label>
+                        <label class="shipping-opt" id="ship-overnight">
+                            <input type="radio" name="shipping" value="overnight" />
+                            <div class="shipping-opt-info">
+                                <div class="shipping-opt-name">Overnight Delivery</div>
+                                <div class="shipping-opt-desc">Next business day · Premium temperature control</div>
+                            </div>
+                            <span class="shipping-opt-price">$19.99</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Promo Code -->
+                <div class="checkout-card" style="padding:20px 32px">
+                    <h3 style="margin-bottom:14px"><span class="card-icon">🏷️</span> Promo Code</h3>
+                    <div class="promo-row">
+                        <div class="form-group" style="margin:0;flex:1">
+                            <input type="text" id="promoInput" placeholder="Enter promo code (e.g. COCOAJOY10)" />
+                        </div>
+                        <button class="btn btn-dark" style="margin-top:0;height:44px;align-self:flex-end"
+                            onclick="applyPromo()">Apply</button>
+                    </div>
+                    <p id="promoMsg" style="font-size:0.82rem;margin-top:8px;display:none"></p>
+                </div>
+
+                <!-- Payment -->
+                <div class="checkout-card">
+                    <h3><span class="card-icon">💳</span> Payment Details</h3>
+                    <div class="card-icons">
+                        <span class="card-brand visa">VISA</span>
+                        <span class="card-brand mc">MC</span>
+                        <span class="card-brand amex">AMEX</span>
+                        <span class="card-brand paypal">PayPal</span>
+                    </div>
+                    <!-- Payment tabs -->
+                    <div style="display:flex;gap:10px;margin-bottom:22px">
+                        <button class="filter-tab active" id="tabCard" onclick="switchPayTab('card')">💳 Card</button>
+                        <button class="filter-tab" id="tabPaypal" onclick="switchPayTab('paypal')">🅿️ PayPal</button>
+                    </div>
+
+                    <!-- Card form -->
+                    <div id="cardForm">
+                        <div class="form-group">
+                            <label for="cardName">Name on Card *</label>
+                            <input type="text" id="cardName" placeholder="Jane Doe" autocomplete="cc-name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNum">Card Number *</label>
+                            <div class="input-with-icon">
+                                <input type="text" id="cardNum" placeholder="1234 5678 9012 3456" maxlength="19"
+                                    autocomplete="cc-number" oninput="formatCardNum(this)" />
+                                <span class="input-icon" id="cardTypeIcon">💳</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExp">Expiry Date *</label>
+                                <input type="text" id="cardExp" placeholder="MM / YY" maxlength="7"
+                                    oninput="formatExpiry(this)" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvc">CVV *</label>
+                                <div class="input-with-icon">
+                                    <input type="text" id="cardCvc" placeholder="123" maxlength="4" />
+                                    <span class="input-icon">🔒</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+                            <input type="checkbox" id="saveCard"
+                                style="accent-color:var(--choc-rich);width:15px;height:15px" />
+                            <label for="saveCard"
+                                style="font-size:0.82rem;color:var(--text-muted);cursor:pointer">Securely save card for
+                                future orders</label>
+                        </div>
+                    </div>
+
+                    <!-- PayPal form -->
+                    <div id="paypalForm" style="display:none;text-align:center;padding:28px 0">
+                        <p style="color:var(--text-muted);margin-bottom:20px;font-size:0.9rem">You'll be redirected to
+                            PayPal to complete your payment securely.</p>
+                        <div style="font-size:3rem;margin-bottom:8px">🅿️</div>
+                        <p style="color:var(--choc-gold);font-weight:700">PayPal Checkout</p>
+                    </div>
+                </div>
+
+                <!-- Place Order Button -->
+                <button class="btn btn-primary btn-lg btn-full" id="placeOrderBtn" onclick="placeOrder()"
+                    style="font-size:1.1rem;padding:18px;border-radius:var(--radius-md)">
+                    🍫 Place Order &amp; Pay
+                </button>
+                <p style="text-align:center;color:var(--text-muted);font-size:0.8rem;margin-top:14px">
+                    🔒 Your payment is encrypted and secure. By placing your order you agree to our <a href="faq.html"
+                        style="color:var(--choc-rich)">Terms &amp; Conditions</a>.
+                </p>
+
+            </div><!-- /formPanels -->
+        </div><!-- /leftCol -->
+
+        <!-- RIGHT: Order Summary -->
+        <div>
+            <div class="order-summary">
+                <div class="summary-header">
+                    <h3>🛒 Order Summary <span id="summaryCount" style="font-size:0.85rem;opacity:0.7"></span></h3>
+                </div>
+                <div class="summary-body">
+                    <div class="summary-items" id="summaryItems">
+                        <!-- populated by JS -->
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <div class="summary-row"><span>Subtotal</span><span id="summarySubtotal">$0.00</span></div>
+                    <div class="summary-row" id="discountRow" style="display:none"><span>Discount 🏷️</span><span
+                            id="summaryDiscount" style="color:var(--green-vegan)">−$0.00</span></div>
+                    <div class="summary-row"><span>Shipping</span><span id="summaryShipping">FREE</span></div>
+                    <div class="summary-row"><span>Tax (8%)</span><span id="summaryTax">$0.00</span></div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-row total"><span>Total</span><span id="summaryTotal">$0.00</span></div>
+
+                    <button class="btn btn-primary btn-full" style="margin-top:20px;font-size:1rem"
+                        onclick="placeOrder()">
+                        Place Order →
+                    </button>
+                </div>
+                <div class="trust-badges">
+                    <div class="trust-item"><span>🔒</span><span>SSL 256-bit encryption</span></div>
+                    <div class="trust-item"><span>🍫</span><span>Freshness guaranteed — every order</span></div>
+                    <div class="trust-item"><span>↩️</span><span>14-day hassle-free returns</span></div>
+                    <div class="trust-item"><span>🚚</span><span>Free shipping on orders over $40</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /checkout-wrapper -->
+
+    <!-- Order Confirmation Modal -->
+    <div class="confirmation-overlay" id="confirmationOverlay">
+        <div class="confirmation-box">
+            <div class="confirmation-icon">🎉</div>
+            <h2>Order Confirmed!</h2>
+            <p>Thank you for your CocoaJoy order. Your chocolates are being lovingly packed!</p>
+            <div class="order-num" id="confirmOrderNum">Order #CJ-00000</div>
+            <p style="font-size:0.85rem">A confirmation email has been sent to <strong id="confirmEmail">your
+                    email</strong>.</p>
+            <p style="font-size:0.85rem;margin-top:6px">Estimated delivery: <strong id="confirmDelivery">3–5 business
+                    days</strong></p>
+            <div class="confirmation-actions">
+                <a href="shop.html" class="btn btn-outline btn-dark"
+                    onclick="document.getElementById('confirmationOverlay').classList.remove('show')">Continue
+                    Shopping</a>
+                <a href="index.html" class="btn btn-gold">Back to Home 🏠</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart 🛒</h3><button class="cart-close" id="cartClose">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">Total: <strong id="cartTotal">$0.00</strong></div><a href="checkout.html"
+                class="btn btn-primary btn-full" href="checkout.html">Checkout</a>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // ── Checkout page logic ──
+
+        let shippingCost = 0;
+        let discountAmount = 0;
+        const TAX_RATE = 0.08;
+        const FREE_SHIPPING_THRESHOLD = 40;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCheckout();
+
+            // Gift message toggle
+            document.getElementById('isGift').addEventListener('change', function () {
+                document.getElementById('giftMsgBox').style.display = this.checked ? 'block' : 'none';
+            });
+
+            // Shipping option selection
+            document.querySelectorAll('input[name="shipping"]').forEach(radio => {
+                radio.addEventListener('change', function () {
+                    document.querySelectorAll('.shipping-opt').forEach(el => el.classList.remove('selected'));
+                    this.closest('.shipping-opt').classList.add('selected');
+                    const val = this.value;
+                    shippingCost = val === 'express' ? 9.99 : val === 'overnight' ? 19.99 : 0;
+                    // Override: free if subtotal >= threshold
+                    const sub = getSubtotal();
+                    if (sub >= FREE_SHIPPING_THRESHOLD && val === 'standard') shippingCost = 0;
+                    updateSummaryTotals();
+                    document.getElementById('summaryShipping').textContent =
+                        shippingCost === 0 ? 'FREE' : `$${shippingCost.toFixed(2)}`;
+                    // Update delivery estimate
+                });
+            });
+        });
+
+        function getSubtotal() {
+            return cart.reduce((s, i) => s + i.price * i.qty, 0);
+        }
+
+        function renderCheckout() {
+            const emptyNotice = document.getElementById('emptyCartNotice');
+            const formPanels = document.getElementById('formPanels');
+            const summaryItems = document.getElementById('summaryItems');
+            const summaryCount = document.getElementById('summaryCount');
+
+            if (cart.length === 0) {
+                emptyNotice.style.display = 'block';
+                formPanels.style.display = 'none';
+                summaryItems.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px">No items in cart</p>';
+                summaryCount.textContent = '';
+                updateSummaryTotals();
+                return;
+            }
+
+            emptyNotice.style.display = 'none';
+            formPanels.style.display = 'block';
+
+            const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+            summaryCount.textContent = `(${totalItems} item${totalItems !== 1 ? 's' : ''})`;
+
+            summaryItems.innerHTML = cart.map(item => `
+    <div class="summary-item">
+      <div class="summary-item-emoji">
+        ${item.emoji}
+        <span class="summary-item-qty">${item.qty}</span>
+      </div>
+      <div class="summary-item-info">
+        <div class="summary-item-name">${item.name}</div>
+        ${item.size ? `<div class="summary-item-sub">${item.size}</div>` : ''}
+      </div>
+      <div class="summary-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+    </div>`).join('');
+
+            updateSummaryTotals();
+        }
+
+        function updateSummaryTotals() {
+            const sub = getSubtotal();
+            const shipping = cart.length === 0 ? 0 :
+                (sub >= FREE_SHIPPING_THRESHOLD && shippingCost === 0) ? 0 : shippingCost;
+            const discounted = Math.max(0, sub - discountAmount);
+            const tax = (discounted + shipping) * TAX_RATE;
+            const total = discounted + shipping + tax;
+
+            document.getElementById('summarySubtotal').textContent = `$${sub.toFixed(2)}`;
+            document.getElementById('summaryTax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('summaryTotal').textContent = `$${total.toFixed(2)}`;
+
+            // Standard shipping free badge
+            const stdPrice = document.getElementById('standardPrice');
+            if (stdPrice) stdPrice.textContent = sub >= FREE_SHIPPING_THRESHOLD ? 'FREE' : '$0.00';
+
+            if (discountAmount > 0) {
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('summaryDiscount').textContent = `−$${discountAmount.toFixed(2)}`;
+            }
+
+            // Shipping display
+            if (shipping === 0) {
+                document.getElementById('summaryShipping').textContent = 'FREE';
+            } else {
+                document.getElementById('summaryShipping').textContent = `$${shipping.toFixed(2)}`;
+            }
+        }
+
+        function applyPromo() {
+            const code = document.getElementById('promoInput').value.trim().toUpperCase();
+            const msg = document.getElementById('promoMsg');
+            msg.style.display = 'block';
+            const promos = {
+                'COCOAJOY10': 0.10,
+                'SWEETDEAL': 0.15,
+                'CHOC20': 0.20,
+            };
+            if (promos[code]) {
+                const pct = promos[code];
+                discountAmount = getSubtotal() * pct;
+                msg.style.color = 'var(--green-vegan)';
+                msg.textContent = `✅ Code applied! ${Math.round(pct * 100)}% off → −$${discountAmount.toFixed(2)}`;
+                updateSummaryTotals();
+            } else {
+                msg.style.color = '#c00';
+                msg.textContent = '❌ Invalid or expired promo code.';
+            }
+        }
+
+        function switchPayTab(tab) {
+            const cardForm = document.getElementById('cardForm');
+            const paypalForm = document.getElementById('paypalForm');
+            document.getElementById('tabCard').classList.toggle('active', tab === 'card');
+            document.getElementById('tabPaypal').classList.toggle('active', tab === 'paypal');
+            cardForm.style.display = tab === 'card' ? 'block' : 'none';
+            paypalForm.style.display = tab === 'paypal' ? 'block' : 'none';
+        }
+
+        function formatCardNum(input) {
+            let val = input.value.replace(/\D/g, '').substring(0, 16);
+            input.value = val.replace(/(.{4})/g, '$1 ').trim();
+            // Card type icon
+            const icon = document.getElementById('cardTypeIcon');
+            const first = val[0];
+            if (first === '4') icon.textContent = '💳'; // Visa
+            else if (first === '5') icon.textContent = '🟠'; // MC
+            else if (first === '3') icon.textContent = '🟦'; // Amex
+            else icon.textContent = '💳';
+        }
+
+        function formatExpiry(input) {
+            let val = input.value.replace(/\D/g, '').substring(0, 4);
+            if (val.length >= 3) val = val.substring(0, 2) + ' / ' + val.substring(2);
+            input.value = val;
+        }
+
+        function validateForm() {
+            const required = ['firstName', 'lastName', 'email', 'address1', 'city', 'state', 'zip'];
+            for (const id of required) {
+                const el = document.getElementById(id);
+                if (!el || !el.value.trim()) {
+                    el.focus(); el.style.borderColor = '#c00';
+                    el.addEventListener('input', () => el.style.borderColor = '', { once: true });
+                    showToast(`Please fill in all required fields`);
+                    return false;
+                }
+            }
+            const email = document.getElementById('email').value;
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('Please enter a valid email address');
+                return false;
+            }
+            return true;
+        }
+
+        function placeOrder() {
+            if (cart.length === 0) { showToast('Your cart is empty!'); return; }
+            if (!validateForm()) return;
+
+            const btn = document.getElementById('placeOrderBtn');
+            btn.textContent = '⏳ Processing…';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Generate order number
+                const orderNum = 'CJ-' + Math.floor(10000 + Math.random() * 89999);
+                document.getElementById('confirmOrderNum').textContent = 'Order #' + orderNum;
+                document.getElementById('confirmEmail').textContent = document.getElementById('email').value;
+
+                // Delivery estimate
+                const ship = document.querySelector('input[name="shipping"]:checked')?.value || 'standard';
+                const est = ship === 'overnight' ? 'Next business day' : ship === 'express' ? '1–2 business days' : '3–5 business days';
+                document.getElementById('confirmDelivery').textContent = est;
+
+                // Clear cart and show confirmation
+                cart = [];
+                saveCart();
+                updateCartUI();
+
+                document.getElementById('confirmationOverlay').classList.add('show');
+
+                // Update steps
+                ['step2', 'step3', 'step4'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) { el.classList.remove('active'); el.classList.add('done'); el.querySelector('.step-num').textContent = '✓'; }
+                });
+
+                btn.textContent = '🍫 Place Order & Pay';
+                btn.disabled = false;
+            }, 1800);
+        }
+    </script>
+
+</body>
+
+</html>
