@@ -77,25 +77,31 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Product Card HTML Builder ---
 function productCardHTML(p) {
     const badgeHTML = p.badge ? `<div class="product-badge badge-${p.badge}">${p.badge === 'bestseller' ? '🏆 Bestseller' : p.badge === 'new' ? '✨ New' : p.badge === 'seasonal' ? '🌟 Seasonal' : p.badge === 'vegan' ? '🌱 Vegan' : p.badge === 'limited' ? '⏳ Limited' : p.badge}</div>` : '';
-    const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
+    const stars = '★'.repeat(Math.floor(p.rating || 5)) + ((p.rating || 5) % 1 >= 0.5 ? '½' : '');
     const bgColor = p.colors ? p.colors[0] : 'linear-gradient(135deg,#f5e9d7,#eedbc0)';
+    
+    // Check if we should show an image or an emoji
+    const imageContent = p.image 
+        ? `<img src="${p.image}" alt="${p.name}" class="product-actual-img" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&q=80&w=800'">`
+        : `<span class="product-emoji">${p.emoji || '🍫'}</span>`;
+
     return `
     <div class="product-card reveal">
       <a href="product.html?id=${p.id}" style="text-decoration:none">
-        <div class="product-img" style="background:${bgColor}">
+        <div class="product-img" style="background:${p.image ? 'white' : bgColor}">
           ${badgeHTML}
-          <span class="product-emoji">${p.emoji}</span>
+          ${imageContent}
         </div>
       </a>
       <div class="product-info">
         <div class="product-rating">
           <span class="product-stars">${stars}</span>
-          <span class="product-reviews">(${p.reviews})</span>
+          <span class="product-reviews">(${p.reviews || 0})</span>
         </div>
         <a href="product.html?id=${p.id}" style="text-decoration:none">
           <h3 class="product-name">${p.name}</h3>
         </a>
-        <p class="product-desc">${p.desc}</p>
+        <p class="product-desc">${p.desc || p.description || ''}</p>
         <div class="product-footer">
           <span class="product-price">$${p.price.toFixed(2)}</span>
           <button class="add-to-cart" onclick="addToCart(${p.id})">Add to Cart</button>
