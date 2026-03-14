@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const PLEASURENEST_DIR = path.join('..', 'PleasureNest');
+const csvDir = path.join(__dirname);
 const DATA_FILE = path.join('js', 'data.js');
 
 function parsePrice(priceStr) {
@@ -105,12 +105,12 @@ function integrate() {
     console.log(`Current products count: ${existingNames.size}. Max ID: ${maxId}`);
 
     console.log('Finding CSV files in PleasureNest...');
-    const csvFiles = fs.readdirSync(PLEASURENEST_DIR)
+    const csvFiles = fs.readdirSync(csvDir)
         .filter(file => file.endsWith('.csv'));
     
     let newProducts = [];
     csvFiles.forEach(file => {
-        const filePath = path.join(PLEASURENEST_DIR, file);
+        const filePath = path.join(csvDir, file);
         console.log(`Processing ${file}...`);
         newProducts = newProducts.concat(parseCSV(filePath));
     });
