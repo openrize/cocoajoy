@@ -58,11 +58,14 @@
             <div class="shop-controls">
                 <div class="filter-tabs">
                     <button class="filter-tab active" data-filter="all" id="filter-all">All Products</button>
-                    <button class="filter-tab" data-filter="artisanal" id="filter-artisanal">🍫 Artisanal</button>
-                    <button class="filter-tab" data-filter="gift-boxes" id="filter-gift-boxes">🎁 Gift Boxes</button>
-                    <button class="filter-tab" data-filter="seasonal" id="filter-seasonal">🌟 Seasonal</button>
-                    <button class="filter-tab" data-filter="vegan" id="filter-vegan">🌱 Vegan & GF</button>
-                    <button class="filter-tab" data-filter="Premium Lifestyle" id="filter-premium">💎 Premium Lifestyle</button>
+                    <button class="filter-tab" data-filter="Premium Chocolates" id="filter-chocolates">🍫 Chocolates</button>
+                    <button class="filter-tab" data-filter="Energy & Vitality" id="filter-energy">⚡ Energy</button>
+                    <button class="filter-tab" data-filter="Wellness & Health" id="filter-wellness">🌿 Wellness</button>
+                    <button class="filter-tab" data-filter="Gift Sets" id="filter-gifts">🎁 Gift Sets</button>
+                </div>
+                <div class="search-container">
+                    <input type="text" id="shopSearch" placeholder="Search products..." class="search-input">
+                    <span class="search-icon">🔍</span>
                 </div>
                 <select class="sort-select" id="sortSelect">
                     <option value="featured">Sort: Featured</option>
@@ -72,14 +75,16 @@
                 </select>
             </div>
             <div class="products-grid" id="shopGrid"></div>
+            <div id="shopPagination" class="pagination"></div>
+
         </div>
     </section>
 
     <!-- Category anchors for deep-linking -->
-    <div id="artisanal" style="visibility:hidden;height:0"></div>
-    <div id="gift-boxes" style="visibility:hidden;height:0"></div>
-    <div id="seasonal" style="visibility:hidden;height:0"></div>
-    <div id="vegan" style="visibility:hidden;height:0"></div>
+    <div id="chocolates" style="visibility:hidden;height:0"></div>
+    <div id="energy" style="visibility:hidden;height:0"></div>
+    <div id="wellness" style="visibility:hidden;height:0"></div>
+    <div id="gifts" style="visibility:hidden;height:0"></div>
     <div id="deals" style="visibility:hidden;height:0"></div>
 
     <section class="cta-section" style="padding:60px 0">
@@ -103,10 +108,10 @@
                 <div class="footer-col">
                     <h4>Shop</h4>
                     <ul>
-                        <li><a href="shop.html#artisanal">Artisanal</a></li>
-                        <li><a href="shop.html#gift-boxes">Gift Boxes</a></li>
-                        <li><a href="shop.html#seasonal">Seasonal</a></li>
-                        <li><a href="shop.html#vegan">Vegan</a></li>
+                        <li><a href="shop.html#chocolates">Chocolates</a></li>
+                        <li><a href="shop.html#energy">Energy</a></li>
+                        <li><a href="shop.html#wellness">Wellness</a></li>
+                        <li><a href="shop.html#gifts">Gift Sets</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

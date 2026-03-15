@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Checkout â€“ CocoaJoy</title>
+    <title>Checkout – CocoaJoy</title>
     <meta name="description"
         content="Securely complete your CocoaJoy chocolate order. Fast, fresh delivery nationwide." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -554,7 +554,7 @@
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><span class="logo-icon">ðŸ«</span><span
+            <a href="index.html" class="logo"><span class="logo-icon">🍫</span><span
                     class="logo-text">CocoaJoy</span></a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link">Home</a></li>
@@ -565,7 +565,7 @@
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="#" class="cart-icon" id="cartIcon" title="Cart">ðŸ›’ <span class="cart-badge"
+                <a href="#" class="cart-icon" id="cartIcon" title="Cart">🛒 <span class="cart-badge"
                         id="cartBadge">0</span></a>
                 <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
             </div>
@@ -587,7 +587,7 @@
                 </div>
             </div>
             <div style="display:flex;align-items:center;gap:8px;color:rgba(253,246,227,0.6);font-size:0.85rem">
-                ðŸ”’ SSL Secured &nbsp;|&nbsp; ðŸ« Fresh Guarantee
+                🔒 SSL Secured &nbsp;|&nbsp; 🍫 Fresh Guarantee
             </div>
         </div>
     </div>
@@ -597,7 +597,7 @@
         <!-- Progress Steps -->
         <div class="checkout-steps" id="checkoutSteps">
             <div class="step done" id="step1">
-                <div class="step-num">âœ“</div> Cart
+                <div class="step-num">✓</div> Cart
             </div>
             <div class="step-line"></div>
             <div class="step active" id="step2">
@@ -623,10 +623,10 @@
 
             <!-- Empty cart notice (shown if cart is empty) -->
             <div class="empty-cart-notice" id="emptyCartNotice" style="display:none">
-                <div class="empty-icon">ðŸ›’</div>
+                <div class="empty-icon">🛒</div>
                 <h3>Your cart is empty</h3>
                 <p>Add some delicious chocolates before checking out!</p>
-                <a href="shop.html" class="btn btn-primary btn-lg">Browse Chocolates â†’</a>
+                <a href="shop.html" class="btn btn-primary btn-lg">Browse Chocolates →</a>
             </div>
 
             <!-- Panels (hidden if cart empty) -->
@@ -634,7 +634,7 @@
 
                 <!-- Contact Information -->
                 <div class="checkout-card">
-                    <h3><span class="card-icon">ðŸ‘¤</span> Contact Information</h3>
+                    <h3><span class="card-icon">👤</span> Contact Information</h3>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">First Name *</label>
@@ -657,7 +657,7 @@
 
                 <!-- Shipping Address -->
                 <div class="checkout-card">
-                    <h3><span class="card-icon">ðŸ“¦</span> Shipping Address</h3>
+                    <h3><span class="card-icon">📦</span> Shipping Address</h3>
                     <div class="form-group">
                         <label for="address1">Address Line 1 *</label>
                         <input type="text" id="address1" placeholder="123 Cocoa Street" autocomplete="address-line1" />
@@ -675,7 +675,7 @@
                         <div class="form-group">
                             <label for="state">State *</label>
                             <select id="state" autocomplete="address-level1">
-                                <option value="">Select stateâ€¦</option>
+                                <option value="">Select state…</option>
                                 <option>Alabama</option>
                                 <option>Alaska</option>
                                 <option>Arizona</option>
@@ -739,13 +739,13 @@
                         <input type="checkbox" id="isGift"
                             style="accent-color:var(--choc-rich);width:17px;height:17px" />
                         <label for="isGift"
-                            style="font-size:0.9rem;color:var(--choc-dark);cursor:pointer;font-weight:600">ðŸŽ This is a
-                            gift â€” add complimentary gift packaging & message</label>
+                            style="font-size:0.9rem;color:var(--choc-dark);cursor:pointer;font-weight:600">🎁 This is a
+                            gift — add complimentary gift packaging & message</label>
                     </div>
                     <div id="giftMsgBox" style="display:none;margin-top:12px">
                         <div class="form-group" style="margin-bottom:0">
                             <label for="giftMsg">Gift Message (max 150 chars)</label>
-                            <input type="text" id="giftMsg" placeholder="Happy Birthday! With love ðŸ«"
+                            <input type="text" id="giftMsg" placeholder="Happy Birthday! With love 🍫"
                                 maxlength="150" />
                         </div>
                     </div>
@@ -753,13 +753,13 @@
 
                 <!-- Shipping Method -->
                 <div class="checkout-card">
-                    <h3><span class="card-icon">ðŸšš</span> Shipping Method</h3>
+                    <h3><span class="card-icon">🚚</span> Shipping Method</h3>
                     <div class="shipping-options" id="shippingOptions">
                         <label class="shipping-opt selected" id="ship-standard">
                             <input type="radio" name="shipping" value="standard" checked />
                             <div class="shipping-opt-info">
                                 <div class="shipping-opt-name">Standard Shipping</div>
-                                <div class="shipping-opt-desc">3â€“5 business days Â· Insulated packaging</div>
+                                <div class="shipping-opt-desc">3–5 business days · Insulated packaging</div>
                             </div>
                             <span class="shipping-opt-price free-ship" id="standardPrice">FREE</span>
                         </label>
@@ -767,7 +767,7 @@
                             <input type="radio" name="shipping" value="express" />
                             <div class="shipping-opt-info">
                                 <div class="shipping-opt-name">Express Shipping</div>
-                                <div class="shipping-opt-desc">1â€“2 business days Â· Priority fresh delivery</div>
+                                <div class="shipping-opt-desc">1–2 business days · Priority fresh delivery</div>
                             </div>
                             <span class="shipping-opt-price">$9.99</span>
                         </label>
@@ -775,7 +775,7 @@
                             <input type="radio" name="shipping" value="overnight" />
                             <div class="shipping-opt-info">
                                 <div class="shipping-opt-name">Overnight Delivery</div>
-                                <div class="shipping-opt-desc">Next business day Â· Premium temperature control</div>
+                                <div class="shipping-opt-desc">Next business day · Premium temperature control</div>
                             </div>
                             <span class="shipping-opt-price">$19.99</span>
                         </label>
@@ -784,7 +784,7 @@
 
                 <!-- Promo Code -->
                 <div class="checkout-card" style="padding:20px 32px">
-                    <h3 style="margin-bottom:14px"><span class="card-icon">ðŸ·ï¸</span> Promo Code</h3>
+                    <h3 style="margin-bottom:14px"><span class="card-icon">🏷️</span> Promo Code</h3>
                     <div class="promo-row">
                         <div class="form-group" style="margin:0;flex:1">
                             <input type="text" id="promoInput" placeholder="Enter promo code (e.g. COCOAJOY10)" />
@@ -797,7 +797,7 @@
 
                 <!-- Payment -->
                 <div class="checkout-card">
-                    <h3><span class="card-icon">ðŸ’³</span> Payment Details</h3>
+                    <h3><span class="card-icon">💳</span> Payment Details</h3>
                     <div class="card-icons">
                         <span class="card-brand visa">VISA</span>
                         <span class="card-brand mc">MC</span>
@@ -806,8 +806,8 @@
                     </div>
                     <!-- Payment tabs -->
                     <div style="display:flex;gap:10px;margin-bottom:22px">
-                        <button class="filter-tab active" id="tabCard" onclick="switchPayTab('card')">ðŸ’³ Card</button>
-                        <button class="filter-tab" id="tabPaypal" onclick="switchPayTab('paypal')">ðŸ…¿ï¸ PayPal</button>
+                        <button class="filter-tab active" id="tabCard" onclick="switchPayTab('card')">💳 Card</button>
+                        <button class="filter-tab" id="tabPaypal" onclick="switchPayTab('paypal')">🅿️ PayPal</button>
                     </div>
 
                     <!-- Card form -->
@@ -821,7 +821,7 @@
                             <div class="input-with-icon">
                                 <input type="text" id="cardNum" placeholder="1234 5678 9012 3456" maxlength="19"
                                     autocomplete="cc-number" oninput="formatCardNum(this)" />
-                                <span class="input-icon" id="cardTypeIcon">ðŸ’³</span>
+                                <span class="input-icon" id="cardTypeIcon">💳</span>
                             </div>
                         </div>
                         <div class="form-row">
@@ -834,7 +834,7 @@
                                 <label for="cardCvc">CVV *</label>
                                 <div class="input-with-icon">
                                     <input type="text" id="cardCvc" placeholder="123" maxlength="4" />
-                                    <span class="input-icon">ðŸ”’</span>
+                                    <span class="input-icon">🔒</span>
                                 </div>
                             </div>
                         </div>
@@ -851,7 +851,7 @@
                     <div id="paypalForm" style="display:none;text-align:center;padding:28px 0">
                         <p style="color:var(--text-muted);margin-bottom:20px;font-size:0.9rem">You'll be redirected to
                             PayPal to complete your payment securely.</p>
-                        <div style="font-size:3rem;margin-bottom:8px">ðŸ…¿ï¸</div>
+                        <div style="font-size:3rem;margin-bottom:8px">🅿️</div>
                         <p style="color:var(--choc-gold);font-weight:700">PayPal Checkout</p>
                     </div>
                 </div>
@@ -859,10 +859,10 @@
                 <!-- Place Order Button -->
                 <button class="btn btn-primary btn-lg btn-full" id="placeOrderBtn" onclick="placeOrder()"
                     style="font-size:1.1rem;padding:18px;border-radius:var(--radius-md)">
-                    ðŸ« Place Order &amp; Pay
+                    🍫 Place Order &amp; Pay
                 </button>
                 <p style="text-align:center;color:var(--text-muted);font-size:0.8rem;margin-top:14px">
-                    ðŸ”’ Your payment is encrypted and secure. By placing your order you agree to our <a href="faq.html"
+                    🔒 Your payment is encrypted and secure. By placing your order you agree to our <a href="faq.html"
                         style="color:var(--choc-rich)">Terms &amp; Conditions</a>.
                 </p>
 
@@ -873,7 +873,7 @@
         <div>
             <div class="order-summary">
                 <div class="summary-header">
-                    <h3>ðŸ›’ Order Summary <span id="summaryCount" style="font-size:0.85rem;opacity:0.7"></span></h3>
+                    <h3>🛒 Order Summary <span id="summaryCount" style="font-size:0.85rem;opacity:0.7"></span></h3>
                 </div>
                 <div class="summary-body">
                     <div class="summary-items" id="summaryItems">
@@ -883,8 +883,8 @@
                     <div class="summary-divider"></div>
 
                     <div class="summary-row"><span>Subtotal</span><span id="summarySubtotal">$0.00</span></div>
-                    <div class="summary-row" id="discountRow" style="display:none"><span>Discount ðŸ·ï¸</span><span
-                            id="summaryDiscount" style="color:var(--green-vegan)">âˆ’$0.00</span></div>
+                    <div class="summary-row" id="discountRow" style="display:none"><span>Discount 🏷️ </span><span
+                            id="summaryDiscount" style="color:var(--green-vegan)">−$0.00</span></div>
                     <div class="summary-row"><span>Shipping</span><span id="summaryShipping">FREE</span></div>
                     <div class="summary-row"><span>Tax (8%)</span><span id="summaryTax">$0.00</span></div>
                     <div class="summary-divider"></div>
@@ -892,14 +892,14 @@
 
                     <button class="btn btn-primary btn-full" style="margin-top:20px;font-size:1rem"
                         onclick="placeOrder()">
-                        Place Order â†’
+                        Place Order →
                     </button>
                 </div>
                 <div class="trust-badges">
-                    <div class="trust-item"><span>ðŸ”’</span><span>SSL 256-bit encryption</span></div>
-                    <div class="trust-item"><span>ðŸ«</span><span>Freshness guaranteed â€” every order</span></div>
-                    <div class="trust-item"><span>â†©ï¸</span><span>14-day hassle-free returns</span></div>
-                    <div class="trust-item"><span>ðŸšš</span><span>Free shipping on orders over $40</span></div>
+                    <div class="trust-item"><span>🔒</span><span>SSL 256-bit encryption</span></div>
+                    <div class="trust-item"><span>🌬️</span><span>Freshness guaranteed — every order</span></div>
+                    <div class="trust-item"><span>↩️</span><span>14-day hassle-free returns</span></div>
+                    <div class="trust-item"><span>🚚</span><span>Free shipping on orders over $40</span></div>
                 </div>
             </div>
         </div>
@@ -909,19 +909,19 @@
     <!-- Order Confirmation Modal -->
     <div class="confirmation-overlay" id="confirmationOverlay">
         <div class="confirmation-box">
-            <div class="confirmation-icon">ðŸŽ‰</div>
+            <div class="confirmation-icon">🎉</div>
             <h2>Order Confirmed!</h2>
             <p>Thank you for your CocoaJoy order. Your chocolates are being lovingly packed!</p>
             <div class="order-num" id="confirmOrderNum">Order #CJ-00000</div>
             <p style="font-size:0.85rem">A confirmation email has been sent to <strong id="confirmEmail">your
                     email</strong>.</p>
-            <p style="font-size:0.85rem;margin-top:6px">Estimated delivery: <strong id="confirmDelivery">3â€“5 business
+            <p style="font-size:0.85rem;margin-top:6px">Estimated delivery: <strong id="confirmDelivery">3–5 business
                     days</strong></p>
             <div class="confirmation-actions">
                 <a href="shop.html" class="btn btn-outline btn-dark"
                     onclick="document.getElementById('confirmationOverlay').classList.remove('show')">Continue
                     Shopping</a>
-                <a href="index.html" class="btn btn-gold">Back to Home ðŸ </a>
+                <a href="index.html" class="btn btn-gold">Back to Home 🏠</a>
             </div>
         </div>
     </div>
@@ -929,7 +929,7 @@
     <div class="cart-overlay" id="cartOverlay"></div>
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
-            <h3>Your Cart ðŸ›’</h3><button class="cart-close" id="cartClose">âœ•</button>
+            <h3>Your Cart 🛒</h3><button class="cart-close" id="cartClose">✕</button>
         </div>
         <div class="cart-items" id="cartItems"></div>
         <div class="cart-footer">
@@ -943,7 +943,7 @@
     <script src="js/cart.js"></script>
     <script src="js/main.js"></script>
     <script>
-        // â”€â”€ Checkout page logic â”€â”€
+        // — Checkout page logic —
 
         let shippingCost = 0;
         let discountAmount = 0;
@@ -1035,7 +1035,7 @@
 
             if (discountAmount > 0) {
                 document.getElementById('discountRow').style.display = 'flex';
-                document.getElementById('summaryDiscount').textContent = `âˆ’$${discountAmount.toFixed(2)}`;
+                document.getElementById('summaryDiscount').textContent = `−$${discountAmount.toFixed(2)}`;
             }
 
             // Shipping display
@@ -1059,11 +1059,11 @@
                 const pct = promos[code];
                 discountAmount = getSubtotal() * pct;
                 msg.style.color = 'var(--green-vegan)';
-                msg.textContent = `âœ… Code applied! ${Math.round(pct * 100)}% off â†’ âˆ’$${discountAmount.toFixed(2)}`;
+                msg.textContent = `✅ Code applied! ${Math.round(pct * 100)}% off → −$${discountAmount.toFixed(2)}`;
                 updateSummaryTotals();
             } else {
                 msg.style.color = '#c00';
-                msg.textContent = 'âŒ Invalid or expired promo code.';
+                msg.textContent = '❌ Invalid or expired promo code.';
             }
         }
 
@@ -1082,10 +1082,10 @@
             // Card type icon
             const icon = document.getElementById('cardTypeIcon');
             const first = val[0];
-            if (first === '4') icon.textContent = 'ðŸ’³'; // Visa
-            else if (first === '5') icon.textContent = 'ðŸŸ '; // MC
-            else if (first === '3') icon.textContent = 'ðŸŸ¦'; // Amex
-            else icon.textContent = 'ðŸ’³';
+            if (first === '4') icon.textContent = '💳'; // Visa
+            else if (first === '5') icon.textContent = '🟠'; // MC
+            else if (first === '3') icon.textContent = '🔵'; // Amex
+            else icon.textContent = '💳';
         }
 
         function formatExpiry(input) {
@@ -1118,7 +1118,7 @@
             if (!validateForm()) return;
 
             const btn = document.getElementById('placeOrderBtn');
-            btn.textContent = 'â³ Processingâ€¦';
+            btn.textContent = '⏳ Processing...';
             btn.disabled = true;
 
             setTimeout(() => {
@@ -1129,7 +1129,7 @@
 
                 // Delivery estimate
                 const ship = document.querySelector('input[name="shipping"]:checked')?.value || 'standard';
-                const est = ship === 'overnight' ? 'Next business day' : ship === 'express' ? '1â€“2 business days' : '3â€“5 business days';
+                const est = ship === 'overnight' ? 'Next business day' : ship === 'express' ? '1–2 business days' : '3–5 business days';
                 document.getElementById('confirmDelivery').textContent = est;
 
                 // Clear cart and show confirmation
@@ -1142,10 +1142,10 @@
                 // Update steps
                 ['step2', 'step3', 'step4'].forEach(id => {
                     const el = document.getElementById(id);
-                    if (el) { el.classList.remove('active'); el.classList.add('done'); el.querySelector('.step-num').textContent = 'âœ“'; }
+                    if (el) { el.classList.remove('active'); el.classList.add('done'); el.querySelector('.step-num').textContent = '✓'; }
                 });
 
-                btn.textContent = 'ðŸ« Place Order & Pay';
+                btn.textContent = '🍫 Place Order & Pay';
                 btn.disabled = false;
             }, 1800);
         }

@@ -115,18 +115,41 @@ function initShopPage() {
     const shopGrid = document.getElementById('shopGrid');
     const filterTabs = document.querySelectorAll('.filter-tab');
     const sortSelect = document.getElementById('sortSelect');
+    const shopSearch = document.getElementById('shopSearch');
     if (!shopGrid) return;
 
     let currentFilter = 'all';
+    let searchQuery = '';
+    let currentPage = 1;
+    const itemsPerPage = 8;
 
     function renderShop() {
         let items = [...PRODUCTS];
         if (currentFilter !== 'all') items = items.filter(p => p.category === currentFilter);
+        if (searchQuery) {
+            const query = searchQuery.toLowerCase();
+            items = items.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                (p.description && p.description.toLowerCase().includes(query)) ||
+                (p.desc && p.desc.toLowerCase().includes(query))
+            );
+        }
         const sort = sortSelect?.value || 'featured';
         if (sort === 'price-asc') items.sort((a, b) => a.price - b.price);
         if (sort === 'price-desc') items.sort((a, b) => b.price - a.price);
         if (sort === 'rating') items.sort((a, b) => b.rating - a.rating);
-        shopGrid.innerHTML = items.map(p => productCardHTML(p)).join('');
+
+        const totalPages = Math.ceil(items.length / itemsPerPage);
+        const start = (currentPage - 1) * itemsPerPage;
+        const pagedItems = items.slice(start, start + itemsPerPage);
+
+        shopGrid.innerHTML = pagedItems.map(p => productCardHTML(p)).join('');
+        renderPagination('shopPagination', totalPages, currentPage, (page) => {
+            currentPage = page;
+            renderShop();
+            window.scrollTo({ top: shopGrid.offsetTop - 100, behavior: 'smooth' });
+        });
+
         // Re-apply reveal observer
         shopGrid.querySelectorAll('.reveal').forEach(el => {
             setTimeout(() => el.classList.add('visible'), 50);
@@ -140,10 +163,16 @@ function initShopPage() {
             filterTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             currentFilter = tab.dataset.filter;
+            currentPage = 1;
             renderShop();
         });
     });
-    sortSelect?.addEventListener('change', renderShop);
+    sortSelect?.addEventListener('change', () => { currentPage = 1; renderShop(); });
+    shopSearch?.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        currentPage = 1;
+        renderShop();
+    });
 
     // Check URL hash for category
     const hash = window.location.hash.replace('#', '');
@@ -216,18 +245,73 @@ function changeProductQty(delta) {
 function initBlogPage() {
     const blogGrid = document.getElementById('blogGrid');
     if (!blogGrid) return;
-    blogGrid.innerHTML = BLOG_POSTS.map(post => `
-    <div class="blog-card reveal">
-      <div class="blog-img" style="background:${post.color}">
-        <span class="blog-category">${post.category}</span>
-        <span style="font-size:3rem">${post.emoji}</span>
-      </div>
-      <div class="blog-content">
-        <div class="blog-meta"><span>📅 ${post.date}</span><span>⏱ ${post.read} read</span></div>
-        <h3>${post.title}</h3>
-        <p>${post.excerpt}</p>
-        <a href="#" class="blog-read-more">Read More →</a>
-      </div>
-    </div>`).join('');
-    blogGrid.querySelectorAll('.reveal').forEach(el => setTimeout(() => el.classList.add('visible'), 50));
+
+    let currentBlogPage = 1;
+    const blogItemsPerPage = 4;
+
+    function renderBlog() {
+        const totalPages = Math.ceil(BLOG_POSTS.length / blogItemsPerPage);
+        const start = (currentBlogPage - 1) * blogItemsPerPage;
+        const pagedPosts = BLOG_POSTS.slice(start, start + blogItemsPerPage);
+
+        blogGrid.innerHTML = pagedPosts.map(post => `
+        <div class="blog-card reveal">
+          <div class="blog-img" style="background:${post.color}">
+            <span class="blog-category">${post.category}</span>
+            <span style="font-size:3rem">${post.emoji}</span>
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta"><span>📅 ${post.date}</span><span>⏱ ${post.read} read</span></div>
+            <h3>${post.title}</h3>
+            <p>${post.excerpt}</p>
+            <a href="#" class="blog-read-more">Read More →</a>
+          </div>
+        </div>`).join('');
+
+        renderPagination('blogPagination', totalPages, currentBlogPage, (page) => {
+            currentBlogPage = page;
+            renderBlog();
+            window.scrollTo({ top: blogGrid.offsetTop - 100, behavior: 'smooth' });
+        });
+
+        blogGrid.querySelectorAll('.reveal').forEach(el => setTimeout(() => el.classList.add('visible'), 50));
+    }
+
+    renderBlog();
+}
+
+// --- Pagination UI Helper ---
+function renderPagination(containerId, totalPages, currentPage, onPageClick) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    if (totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+    }
+
+    let html = `
+        <button class="page-btn prev-next" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">← Prev</button>
+    `;
+
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+            html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+        } else if (i === currentPage - 2 || i === currentPage + 2) {
+            html += `<span style="color:var(--text-muted)">...</span>`;
+        }
+    }
+
+    html += `
+        <button class="page-btn prev-next" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">Next →</button>
+    `;
+
+    container.innerHTML = html;
+
+    container.querySelectorAll('.page-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const page = parseInt(btn.dataset.page);
+            if (!isNaN(page)) onPageClick(page);
+        });
+    });
 }
