@@ -12,6 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet" />
+    <script src="https://js.stripe.com/v3/"></script>
     <link rel="stylesheet" href="css/style.css" />
     <style>
         /* â”€â”€ Checkout-specific styles â”€â”€ */
@@ -1113,41 +1114,50 @@
             return true;
         }
 
-        function placeOrder() {
+        const stripe = Stripe('pk_test_51ShEk1Ivv41pmvsHAF3xrOwvr4fQWcDkHrCuKhdagNgamLPLD4ojP2O58k0k0tVmi6pNDTZG8LASQvjTGVvMeU4n00o1mVioPA');
+
+        async function placeOrder() {
             if (cart.length === 0) { showToast('Your cart is empty!'); return; }
             if (!validateForm()) return;
 
             const btn = document.getElementById('placeOrderBtn');
-            btn.textContent = '⏳ Processing...';
+            const originalText = btn.textContent;
+            btn.textContent = '⏳ Redirecting to Stripe...';
             btn.disabled = true;
 
-            setTimeout(() => {
-                // Generate order number
-                const orderNum = 'CJ-' + Math.floor(10000 + Math.random() * 89999);
-                document.getElementById('confirmOrderNum').textContent = 'Order #' + orderNum;
-                document.getElementById('confirmEmail').textContent = document.getElementById('email').value;
-
-                // Delivery estimate
-                const ship = document.querySelector('input[name="shipping"]:checked')?.value || 'standard';
-                const est = ship === 'overnight' ? 'Next business day' : ship === 'express' ? '1–2 business days' : '3–5 business days';
-                document.getElementById('confirmDelivery').textContent = est;
-
-                // Clear cart and show confirmation
-                cart = [];
-                saveCart();
-                updateCartUI();
-
-                document.getElementById('confirmationOverlay').classList.add('show');
-
-                // Update steps
-                ['step2', 'step3', 'step4'].forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) { el.classList.remove('active'); el.classList.add('done'); el.querySelector('.step-num').textContent = '✓'; }
+            try {
+                const response = await fetch('/api/create-checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        cart: cart,
+                        successUrl: window.location.origin + '/success.html',
+                        cancelUrl: window.location.origin + '/cancel.html'
+                    })
                 });
 
-                btn.textContent = '🍫 Place Order & Pay';
+                const { sessionId, error } = await response.json();
+
+                if (error) {
+                    showToast('Payment Error: ' + error, 'error');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    return;
+                }
+
+                const result = await stripe.redirectToCheckout({ sessionId });
+
+                if (result.error) {
+                    showToast(result.error.message, 'error');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error('Checkout Error:', err);
+                showToast('Something went wrong. Please try again.', 'error');
+                btn.textContent = originalText;
                 btn.disabled = false;
-            }, 1800);
+            }
         }
     </script>
 
