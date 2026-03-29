@@ -1126,11 +1126,16 @@
             btn.disabled = true;
 
             try {
+                const customerEmail = document.getElementById('email').value;
+                const customerName = document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value;
+
                 const response = await fetch('/api/create-checkout', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         cart: cart,
+                        customerEmail: customerEmail,
+                        customerName: customerName,
                         successUrl: window.location.origin + '/success.html',
                         cancelUrl: window.location.origin + '/cancel.html'
                     })

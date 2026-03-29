@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const { cart, successUrl, cancelUrl } = req.body;
+        const { cart, successUrl, cancelUrl, customerEmail, customerName } = req.body;
 
         if (!cart || !Array.isArray(cart) || cart.length === 0) {
             res.status(400).json({ error: 'Invalid cart' });
@@ -30,8 +30,12 @@ module.exports = async (req, res) => {
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
+            customer_email: customerEmail,
             success_url: `${successUrl}?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: cancelUrl,
+            shipping_address_collection: {
+                allowed_countries: ['US', 'CA', 'GB'],
+            },
         });
 
         res.status(200).json({ sessionId: session.id });
