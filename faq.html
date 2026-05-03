@@ -24,19 +24,27 @@
                     class="logo-text">CocoaJoy</span></a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="shop.html" class="nav-link">Shop</a></li>
+                <li><a href="shop.html" class="nav-link">Portfolio</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="blog.html" class="nav-link">Blog</a></li>
                 <li><a href="faq.html" class="nav-link active">FAQ</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="#" class="cart-icon" id="cartIcon" title="Cart">🛒 <span class="cart-badge"
-                        id="cartBadge">0</span></a>
+                <a href="contact.html" class="btn btn-primary nav-cta">Contact</a>
                 <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
             </div>
         </div>
     </nav>
+
+    <div class="contact-bar" role="region" aria-label="Contact CocoaJoy">
+        <div class="container contact-bar-inner">
+            <span>Contact us:</span>
+            <a href="mailto:openrize@gmail.com">openrize@gmail.com</a>
+            <span class="contact-bar-sep" aria-hidden="true">·</span>
+            <a href="tel:+12243779143">+1 (224) 377 9143</a>
+        </div>
+    </div>
 
     <section class="page-hero">
         <div class="container">
@@ -123,7 +131,7 @@
                         <div class="faq-answer">
                             <div class="faq-answer-inner">Absolutely! For custom orders (personalised boxes, corporate
                                 gifting, wedding favours), please contact us through our contact page or email
-                                support@cocoajoy.com. We accommodate most customisation requests with at least 5
+                                openrize@gmail.com. We accommodate most customisation requests with at least 5
                                 business days' notice.</div>
                         </div>
                     </div>
@@ -131,9 +139,9 @@
                         <button class="faq-question">Do you offer bulk or corporate orders? <span
                                 class="faq-arrow">▿</span></button>
                         <div class="faq-answer">
-                            <div class="faq-answer-inner">Yes! We offer special pricing for corporate and bulk orders
+                            <div class="faq-answer-inner">Yes! We welcome corporate and bulk orders
                                 (50+ boxes). Our team can also create custom-branded packaging with your company logo.
-                                Contact us at support@cocoajoy.com for a personalised quote.</div>
+                                Contact us at openrize@gmail.com or +1 (224) 377 9143 for a personalised quote.</div>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -153,7 +161,7 @@
                         <div class="faq-answer">
                             <div class="faq-answer-inner">We offer fresh, temperature-controlled delivery nationwide.
                                 Standard shipping takes 3–5 business days. Express (1–2 day) shipping is available at
-                                checkout. Free standard shipping applies to all orders over $40.</div>
+                                checkout. Shipping options and timelines are confirmed when you complete your order.</div>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -191,7 +199,7 @@
                         <div class="faq-answer">
                             <div class="faq-answer-inner">Absolutely! Enter the recipient's address in the shipping
                                 field and your address (or any address) in the billing field. The packing slip we
-                                include never shows prices, making it perfect for gifting.</div>
+                                include is gift-friendly, making it perfect for gifting.</div>
                         </div>
                     </div>
 
@@ -210,7 +218,7 @@
                                 class="faq:arrow">▿</span></button>
                         <div class="faq-answer">
                             <div class="faq-answer-inner">We're so sorry to hear that! Please email us at
-                                support@cocoajoy.com with your order number and clear photos of the damaged items within
+                                openrize@gmail.com with your order number and clear photos of the damaged items within
                                 48 hours of delivery. We'll send a replacement or issue a full refund — your choice.
                             </div>
                         </div>
@@ -281,9 +289,10 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Contact</h4>
+                    <h4>Contact us</h4>
                     <ul>
-                        <li>📧 support@cocoajoy.com</li>
+                        <li><a href="mailto:openrize@gmail.com">openrize@gmail.com</a></li>
+                        <li><a href="tel:+12243779143">+1 (224) 377 9143</a></li>
                     </ul>
                 </div>
             </div>
@@ -293,17 +302,6 @@
         </div>
     </footer>
 
-    <div class="cart-overlay" id="cartOverlay"></div>
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Your Cart 🛒</h3><button class="cart-close" id="cartClose">✕</button>
-        </div>
-        <div class="cart-items" id="cartItems"></div>
-        <div class="cart-footer">
-            <div class="cart-total">Total: <strong id="cartTotal">$0.00</strong></div><a href="shop.html"
-                class="btn btn-primary btn-full">Checkout</a>
-        </div>
-    </div>
     <div class="toast" id="toast"></div>
 
     <style>
@@ -318,7 +316,6 @@
         }
     </style>
     <script src="js/data.js"></script>
-    <script src="js/cart.js"></script>
     <script src="js/main.js"></script>
 </body>
 

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Premium Lifestyle Chocolate – CocoaJoy</title>
+    <title>Project – CocoaJoy Portfolio</title>
     <meta name="description"
-        content="Discover our premium lifestyle chocolate collection. Hand-selected for quality and indulgence." />
+        content="CocoaJoy portfolio project detail. Contact openrize@gmail.com or +1 (224) 377 9143 about this piece." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -25,19 +25,27 @@
                     class="logo-text">CocoaJoy</span></a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="shop.html" class="nav-link active">Shop</a></li>
+                <li><a href="shop.html" class="nav-link active">Portfolio</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="blog.html" class="nav-link">Blog</a></li>
                 <li><a href="faq.html" class="nav-link">FAQ</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="#" class="cart-icon" id="cartIcon" title="Cart">🛒 <span class="cart-badge"
-                        id="cartBadge">0</span></a>
+                <a href="contact.html" class="btn btn-primary nav-cta">Get in touch</a>
                 <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
             </div>
         </div>
     </nav>
+
+    <div class="contact-bar" role="region" aria-label="Contact CocoaJoy">
+        <div class="container contact-bar-inner">
+            <span>Contact us:</span>
+            <a href="mailto:openrize@gmail.com">openrize@gmail.com</a>
+            <span class="contact-bar-sep" aria-hidden="true">·</span>
+            <a href="tel:+12243779143">+1 (224) 377 9143</a>
+        </div>
+    </div>
 
     <div style="height:72px"></div>
 
@@ -46,7 +54,7 @@
             <!-- Breadcrumb -->
             <div class="breadcrumb" style="justify-content:flex-start;margin-bottom:32px">
                 <a href="index.html">Home</a><span>/</span>
-                <a href="shop.html">Shop</a><span>/</span>
+                <a href="shop.html">Portfolio</a><span>/</span>
                 <span id="pBreadcrumb">Product</span>
             </div>
 
@@ -79,38 +87,14 @@
                         <span class="product-stars" style="font-size:1rem" id="pRatingStars">★★★★★</span>
                         <span class="product-reviews" id="pRatingCount">(284 reviews)</span>
                     </div>
-                    <div class="product-detail-price" id="pPrice">$28.99</div>
+                    <div class="product-detail-contact-card">
+                        <h3>Contact about this item</h3>
+                        <a id="pEmailLink" class="btn btn-primary btn-full" href="mailto:openrize@gmail.com">openrize@gmail.com</a>
+                        <a class="btn btn-outline btn-full" href="tel:+12243779143" style="margin-top:10px">+1 (224) 377 9143</a>
+                    </div>
                     <p class="product-detail-desc" id="pDesc">Experience the richness of our handcrafted dark chocolate
                         truffles. Each piece is made with premium cocoa and care, delivering a luxurious chocolate
                         experience.</p>
-
-                    <!-- Size Picker -->
-                    <div class="size-picker">
-                        <label>Size / Quantity</label>
-                        <div class="size-options" id="pSizes">
-                            <button class="size-opt selected">6 Pieces</button>
-                            <button class="size-opt">12 Pieces</button>
-                            <button class="size-opt">24 Pieces</button>
-                        </div>
-                    </div>
-
-                    <!-- Qty Picker -->
-                    <div class="qty-picker">
-                        <label>Qty</label>
-                        <div class="qty-control">
-                            <button onclick="changeProductQty(-1)">−</button>
-                            <input type="number" id="pQty" value="1" min="1" max="20" />
-                            <button onclick="changeProductQty(1)">+</button>
-                        </div>
-                    </div>
-
-                    <!-- Add to Cart -->
-                    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px">
-                        <button class="btn btn-primary btn-lg" id="pAddToCart" style="flex:1">Add to Cart 🛒</button>
-                        <button class="btn btn-outline btn-lg"
-                            style="background:var(--choc-light);color:var(--choc-rich);border-color:var(--choc-caramel)"
-                            onclick="showToast('Added to wishlist! ❤️')">♡ Wishlist</button>
-                    </div>
 
                     <!-- Features List -->
                     <ul class="product-features" id="pFeatures">
@@ -120,30 +104,7 @@
                         <li>Available in 6, 12, or 24-piece boxes</li>
                     </ul>
 
-                    <!-- Trust Badges -->
-                    <div
-                        style="display:flex;gap:16px;flex-wrap:wrap;padding:20px 0;border-top:1px solid rgba(92,42,14,0.1);border-bottom:1px solid rgba(92,42,14,0.1)">
-                        <div style="text-align:center;flex:1;min-width:80px">
-                            <div style="font-size:1.5rem">🚚</div>
-                            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Free
-                                Shipping<br />over $40</div>
-                        </div>
-                        <div style="text-align:center;flex:1;min-width:80px">
-                            <div style="font-size:1.5rem">🎁 </div>
-                            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Gift<br />Packaging
-                            </div>
-                        </div>
-                        <div style="text-align:center;flex:1;min-width:80px">
-                            <div style="font-size:1.5rem">👍</div>
-                            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Handcrafted<br />Daily
-                            </div>
-                        </div>
-                        <div style="text-align:center;flex:1;min-width:80px">
-                            <div style="font-size:1.5rem">↩️</div>
-                            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">14-day<br />Returns
-                            </div>
-                        </div>
-                    </div>
+                    <p style="font-size:0.88rem;color:var(--text-muted);padding-top:12px;border-top:1px solid rgba(92,42,14,0.1)">This portfolio showcases our craft. Availability and collaboration details are shared when you get in touch.</p>
                 </div>
             </div>
         </div>
@@ -192,8 +153,8 @@
     <section style="background:var(--choc-cream);padding:80px 0">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge">You May Also Like</div>
-                <h2 class="section-title">Related Products</h2>
+                <div class="section-badge">More work</div>
+                <h2 class="section-title">Related pieces</h2>
             </div>
             <div class="products-grid" id="relatedGrid"></div>
         </div>
@@ -201,8 +162,8 @@
 
     <section class="cta-section" style="padding:70px 0">
         <div class="container cta-content">
-            <h2>Explore All Our Chocolates</h2>
-            <a href="shop.html" class="btn btn-gold btn-lg">Shop All Products</a>
+            <h2>Explore the full portfolio</h2>
+            <a href="shop.html" class="btn btn-gold btn-lg">View all projects</a>
         </div>
     </section>
 
@@ -216,9 +177,9 @@
                             class="social-link">📘</a><a href="#" class="social-link">🐦</a></div>
                 </div>
                 <div class="footer-col">
-                    <h4>Shop</h4>
+                    <h4>Portfolio</h4>
                     <ul>
-                        <li><a href="shop.html">All Products</a></li>
+                        <li><a href="shop.html">All projects</a></li>
                         <li><a href="shop.html#gift-boxes">Gift Boxes</a></li>
                         <li><a href="shop.html#vegan">Vegan</a></li>
                     </ul>
@@ -231,9 +192,10 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Contact</h4>
+                    <h4>Contact us</h4>
                     <ul>
-                        <li>📧 support@cocoajoy.com</li>
+                        <li><a href="mailto:openrize@gmail.com">openrize@gmail.com</a></li>
+                        <li><a href="tel:+12243779143">+1 (224) 377 9143</a></li>
                     </ul>
                     <div class="newsletter">
                         <p>Get sweet deals:</p>
@@ -249,20 +211,8 @@
         </div>
     </footer>
 
-    <div class="cart-overlay" id="cartOverlay"></div>
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Your Cart 🛒</h3><button class="cart-close" id="cartClose">✕</button>
-        </div>
-        <div class="cart-items" id="cartItems"></div>
-        <div class="cart-footer">
-            <div class="cart-total">Total: <strong id="cartTotal">$0.00</strong></div><a href="shop.html"
-                class="btn btn-primary btn-full" href="checkout.html">Checkout</a>
-        </div>
-    </div>
     <div class="toast" id="toast"></div>
     <script src="js/data.js"></script>
-    <script src="js/cart.js"></script>
     <script src="js/main.js"></script>
 </body>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Successful – CocoaJoy</title>
+    <title>Thanks – CocoaJoy</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         .success-page {
@@ -40,18 +40,21 @@
     </style>
 </head>
 <body>
+    <div class="contact-bar" role="region" aria-label="Contact CocoaJoy">
+        <div class="container contact-bar-inner">
+            <span>Contact us:</span>
+            <a href="mailto:openrize@gmail.com">openrize@gmail.com</a>
+            <span class="contact-bar-sep" aria-hidden="true">·</span>
+            <a href="tel:+12243779143">+1 (224) 377 9143</a>
+        </div>
+    </div>
     <div class="success-page">
         <div class="success-card">
             <span class="success-icon">🎉</span>
-            <h1>Sweet Success!</h1>
-            <p>Thank you for your order. We've received your payment and are preparing your chocolates with love. You'll receive a confirmation email shortly.</p>
-            <a href="index.html" class="btn btn-primary">Continue Shopping</a>
+            <h1>Thanks for visiting</h1>
+            <p>This page is only used if you followed an old payment link. The site is now a portfolio — reach us at <a href="mailto:openrize@gmail.com">openrize@gmail.com</a> or <a href="tel:+12243779143">+1 (224) 377 9143</a>.</p>
+            <a href="shop.html" class="btn btn-primary">View portfolio</a>
         </div>
     </div>
-
-    <script>
-        // Clear the cart on successful payment
-        localStorage.removeItem('cocoajoy_cart');
-    </script>
 </body>
 </html>

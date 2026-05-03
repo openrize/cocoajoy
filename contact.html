@@ -24,19 +24,27 @@
                     class="logo-text">CocoaJoy</span></a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="shop.html" class="nav-link">Shop</a></li>
+                <li><a href="shop.html" class="nav-link">Portfolio</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="blog.html" class="nav-link">Blog</a></li>
                 <li><a href="faq.html" class="nav-link">FAQ</a></li>
                 <li><a href="contact.html" class="nav-link active">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="#" class="cart-icon" id="cartIcon" title="Cart">🛒 <span class="cart-badge"
-                        id="cartBadge">0</span></a>
+                <a href="shop.html" class="btn btn-outline nav-cta" style="margin-right:8px">Portfolio</a>
                 <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
             </div>
         </div>
     </nav>
+
+    <div class="contact-bar" role="region" aria-label="Contact CocoaJoy">
+        <div class="container contact-bar-inner">
+            <span>Contact us:</span>
+            <a href="mailto:openrize@gmail.com">openrize@gmail.com</a>
+            <span class="contact-bar-sep" aria-hidden="true">·</span>
+            <a href="tel:+12243779143">+1 (224) 377 9143</a>
+        </div>
+    </div>
 
     <section class="page-hero">
         <div class="container">
@@ -62,14 +70,14 @@
                         <div class="contact-item-icon">📧</div>
                         <div class="contact-item-text">
                             <strong>Email Us</strong>
-                            <span>support@cocoajoy.com</span>
+                            <span><a href="mailto:openrize@gmail.com">openrize@gmail.com</a></span>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-item-icon">📞</div>
                         <div class="contact-item-text">
                             <strong>Call Us</strong>
-                            <span>+1 (800) COCOA-JOY</span>
+                            <span><a href="tel:+12243779143">+1 (224) 377 9143</a></span>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -214,10 +222,10 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Contact</h4>
+                    <h4>Contact us</h4>
                     <ul>
-                        <li>📧 support@cocoajoy.com</li>
-                        <li>📞 +1 (800) COCOA-JOY</li>
+                        <li><a href="mailto:openrize@gmail.com">openrize@gmail.com</a></li>
+                        <li><a href="tel:+12243779143">+1 (224) 377 9143</a></li>
                     </ul>
                 </div>
             </div>
@@ -227,20 +235,8 @@
         </div>
     </footer>
 
-    <div class="cart-overlay" id="cartOverlay"></div>
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Your Cart 🛒</h3><button class="cart-close" id="cartClose">✕</button>
-        </div>
-        <div class="cart-items" id="cartItems"></div>
-        <div class="cart-footer">
-            <div class="cart-total">Total: <strong id="cartTotal">$0.00</strong></div><a href="shop.html"
-                class="btn btn-primary btn-full" href="checkout.html">Checkout</a>
-        </div>
-    </div>
     <div class="toast" id="toast"></div>
     <script src="js/data.js"></script>
-    <script src="js/cart.js"></script>
     <script src="js/main.js"></script>
 </body>
 

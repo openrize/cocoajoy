@@ -1,6 +1,36 @@
 // ==========================================
-// CocoaJoy – Main JS
+// CocoaJoy – Main JS (portfolio site)
 // ==========================================
+
+const SITE_EMAIL = 'openrize@gmail.com';
+const SITE_PHONE_DISPLAY = '+1 (224) 377 9143';
+const SITE_PHONE_TEL = '+12243779143';
+
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.className = `toast ${type} show`;
+    setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function subscribeNewsletter() {
+    const emailEl = document.getElementById('footerEmail');
+    if (!emailEl) return;
+    if (!emailEl.value || !emailEl.value.includes('@')) { showToast('Please enter a valid email', 'error'); return; }
+    showToast('🎉 Thanks for subscribing!');
+    emailEl.value = '';
+}
+
+function productContactLinksHTML(productName) {
+    const sub = encodeURIComponent(productName ? `Inquiry: ${productName}` : 'Inquiry from CocoaJoy portfolio');
+    return `
+    <div class="product-contact-mini">
+      <a class="product-contact-email" href="mailto:${SITE_EMAIL}?subject=${sub}">${SITE_EMAIL}</a>
+      <span class="product-contact-sep" aria-hidden="true">·</span>
+      <a class="product-contact-phone" href="tel:${SITE_PHONE_TEL}">${SITE_PHONE_DISPLAY}</a>
+    </div>`;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -102,9 +132,9 @@ function productCardHTML(p) {
           <h3 class="product-name">${p.name}</h3>
         </a>
         <p class="product-desc">${p.desc || p.description || ''}</p>
+        ${productContactLinksHTML(p.name)}
         <div class="product-footer">
-          <span class="product-price">$${p.price.toFixed(2)}</span>
-          <button class="add-to-cart" onclick="addToCart(${p.id})">Add to Cart</button>
+          <a href="product.html?id=${p.id}" class="btn btn-primary btn-sm">View details</a>
         </div>
       </div>
     </div>`;
@@ -135,8 +165,6 @@ function initShopPage() {
             );
         }
         const sort = sortSelect?.value || 'featured';
-        if (sort === 'price-asc') items.sort((a, b) => a.price - b.price);
-        if (sort === 'price-desc') items.sort((a, b) => b.price - a.price);
         if (sort === 'rating') items.sort((a, b) => b.rating - a.rating);
 
         const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -196,7 +224,6 @@ function initProductPage() {
     document.getElementById('pEmoji').textContent = product.emoji;
     document.getElementById('pEmoji').parentElement.style.background = product.colors ? product.colors[0] : '';
     document.getElementById('pName').textContent = product.name;
-    document.getElementById('pPrice').textContent = `$${product.price.toFixed(2)}`;
     document.getElementById('pDesc').textContent = product.longDesc || product.desc;
     document.getElementById('pRatingStars').textContent = '★'.repeat(Math.floor(product.rating));
     document.getElementById('pRatingCount').textContent = `(${product.reviews} reviews)`;
@@ -207,18 +234,10 @@ function initProductPage() {
     const fList = document.getElementById('pFeatures');
     if (fList && product.features) fList.innerHTML = product.features.map(f => `<li>${f}</li>`).join('');
 
-    // Sizes
-    const sBox = document.getElementById('pSizes');
-    if (sBox && product.sizes) {
-        sBox.innerHTML = product.sizes.map((s, i) => `<button class="size-opt ${i === 0 ? 'selected' : ''}" onclick="selectSize(this,'${s}')">${s}</button>`).join('');
+    const emailBtn = document.getElementById('pEmailLink');
+    if (emailBtn) {
+        emailBtn.href = `mailto:${SITE_EMAIL}?subject=${encodeURIComponent('Inquiry: ' + product.name)}`;
     }
-
-    // Add to cart button
-    document.getElementById('pAddToCart')?.addEventListener('click', () => {
-        const selectedSize = document.querySelector('.size-opt.selected')?.textContent;
-        const qty = parseInt(document.getElementById('pQty')?.value || 1);
-        for (let i = 0; i < qty; i++) addToCart(product.id, selectedSize);
-    });
 
     // Related products
     const relGrid = document.getElementById('relatedGrid');
@@ -227,18 +246,6 @@ function initProductPage() {
         relGrid.innerHTML = related.length ? related.map(p => productCardHTML(p)).join('') : PRODUCTS.slice(0, 3).map(p => productCardHTML(p)).join('');
         relGrid.querySelectorAll('.reveal').forEach(el => setTimeout(() => el.classList.add('visible'), 50));
     }
-}
-
-function selectSize(el, size) {
-    document.querySelectorAll('.size-opt').forEach(b => b.classList.remove('selected'));
-    el.classList.add('selected');
-}
-
-function changeProductQty(delta) {
-    const input = document.getElementById('pQty');
-    if (!input) return;
-    const val = Math.max(1, parseInt(input.value) + delta);
-    input.value = val;
 }
 
 // --- Blog Page ---
